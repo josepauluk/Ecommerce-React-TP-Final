@@ -1,10 +1,16 @@
 // src/components/Navbar.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuth();
+
+  useEffect(() => {
+    // Aquí puedes agregar lógica adicional después de un cambio en isAuthenticated
+  }, [isAuthenticated]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid d-flex justify-content-between align-items-center">
@@ -34,27 +40,17 @@ const Navbar = () => {
                 Productos
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link"to="/ProductList">
-                Lista de Productos
-              </Link>
-            </li>             */}
             <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
+              {isAuthenticated ? (
+                <button className="nav-link" onClick={logout}>
+                  Logout
+                </button>
+              ) : (
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              )}
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                Register
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart-detail">
-                Carrito
-              </Link>
-            </li>
-            {/* Agrega más enlaces según tus necesidades */}
           </ul>
         </div>
       </div>

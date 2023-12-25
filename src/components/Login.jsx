@@ -1,75 +1,76 @@
-// src/components/Login.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar si el usuario ya está autenticado al cargar la página
+    const isAuthenticated = localStorage.getItem('access_token') !== null;
+
+    if (isAuthenticated) {
+      // Redirigir al usuario a la página principal si ya está autenticado
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://api.escuelajs.co/api/v1/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+      const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
+        email: email,
+        password: password,
       });
 
-      if (!response.ok) {
-        throw new Error('Credenciales incorrectas');
-      }
+      // Almacenar tokens en el local storage
+      localStorage.setItem('access_token', response.data.access_token);
+      localStorage.setItem('refresh_token', response.data.refresh_token);
 
-      const data = await response.json();
-
-      // Almacenar token en el almacenamiento local o en el estado global, por ejemplo:
-      // localStorage.setItem('access_token', data.access_token);
-
-      // Redirigir al usuario a la página principal
+      // Redirigir al usuario a la página principal después de iniciar sesión
       navigate('/');
     } catch (error) {
-      setError('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
+      console.error('Error during login:', error.response.data);
     }
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center mt-5">
-        <Col xs={12} md={6}>
-          <h2 className="text-center mb-4">Iniciar Sesión</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
+    <div className="container mt-5">
+      <h2>Login</h2>
+      <form>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-            <Form.Group controlId="formPassword">
-              <Form.Label>Contraseña:</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-            <Button variant="primary" onClick={handleLogin}>
-              Iniciar Sesión
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+        <button type="button" className="btn btn-primary" onClick={handleLogin}>
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 
