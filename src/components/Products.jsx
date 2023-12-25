@@ -37,8 +37,8 @@ const Products = () => {
   }, [location.search]);
 
   return (
-    <div className="container mt-4">
-      <h2>Products</h2>
+    <div className="container mt-4">      
+      
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -59,6 +59,7 @@ const Products = () => {
           </li>
         </ol>
       </nav>
+      <h2>Products</h2>
       {loading ? (
         <p>Loading products...</p>
       ) : (

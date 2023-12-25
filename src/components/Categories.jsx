@@ -29,7 +29,7 @@ const Categories = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Categories</h2>
+      
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
@@ -40,6 +40,7 @@ const Categories = () => {
           </li>
         </ol>
       </nav>
+      <h2>Categories</h2>
       {loading ? (
         <p>Loading categories...</p>
       ) : (
