@@ -8,10 +8,9 @@ const ProductDetail = () => {
 
   useEffect(() => {
     // Lógica para obtener los detalles del producto con la API
-    // Puedes usar la misma API que proporcionaste anteriormente
     const fetchProductDetail = async () => {
       try {
-        const response = await fetch(`https://fakeapi.platzi.com/data/product/${id}`);
+        const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -28,10 +27,25 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <h2>{product.name}</h2>
+      <h2>{product.title}</h2>
       <p>Precio: ${product.price}</p>
-      <p>Categoría: {product.category}</p>
-      {/* Aquí puedes agregar más detalles sobre el producto si es necesario */}
+      <p>Categoría: {product.category.name}</p>
+      <p>Descripción: {product.description}</p>
+      {product.images && (
+        <div>
+          <h4>Imágenes del producto</h4>
+          <div style={{ display: 'flex', gap: '16px' }}>
+            {product.images.map((imageUrl, index) => (
+              <img
+                key={index}
+                src={imageUrl}
+                alt={`Imagen ${index + 1}`}
+                style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover' }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
