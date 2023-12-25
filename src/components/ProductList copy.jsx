@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductList = ({ products, categories }) => {
+const ProductList = ({ products = [], categories = [] }) => {
+  console.log('Products:', products);
   const [filteredProducts, setFilteredProducts] = useState([...products]);
   const [filter, setFilter] = useState({});
 
@@ -24,12 +25,6 @@ const ProductList = ({ products, categories }) => {
   };
 
   const filterProducts = () => {
-    // Verificar si products es un array antes de continuar
-    if (!Array.isArray(products)) {
-      console.error('Error: products is not an array');
-      return;
-    }
-
     // Lógica de filtrado aquí
     let filtered = [...products];
 

@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Categories from './components/Categories';
 import Products from './components/Products';
+import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import ProductCreate from './components/ProductCreate';
 import ProductEdit from './components/ProductEdit';
@@ -22,6 +23,10 @@ const App= () => {
           <Route path="/register" element={<Register />} />
           <Route path="/categories/" element={<Categories />} />
           <Route path="/products" element={<Products />} />
+          
+          <Route path="/products" element={<ProductList />} />
+
+          {/* <Route path="/ProductList" element={<ProductList />} />           */}
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/products/create" element={<ProductCreate />} />
           <Route path="/products/edit/:id" element={<ProductEdit />} />
