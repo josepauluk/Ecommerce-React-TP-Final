@@ -14,6 +14,9 @@ import ProductEdit from './components/ProductEdit';
 import CartDetail from './components/CartDetail';
 import NotFound from './components/NotFound';
 
+import AuthComponent from './components/AuthComponent';
+import UserComponent from './components/UserComponent';
+
 const App = () => {
   return (
     <Router>
