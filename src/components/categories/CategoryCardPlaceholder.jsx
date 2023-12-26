@@ -1,0 +1,33 @@
+/*
+  Proyecto: [Ecommerce-TP-Info-2023]
+  Autor: [José Luis Pauluk]
+  Fecha: [26/12/2023]
+  Descripción: [Proyecto Final Informatorio Diciembre 2023]
+*/
+
+import { Card, Spinner, Placeholder, Col } from 'react-bootstrap';
+
+function CategoryCardPlaceholder() {
+  return (
+    <Col>
+      <Card xs={6}>
+        <div className="text-center m-5">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Cargando</span>
+          </Spinner>
+        </div>
+        <Card.Body>
+          <Placeholder as={Card.Title} animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder as={Card.Text} animation="glow">
+            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+            <Placeholder xs={6} /> <Placeholder xs={8} />
+          </Placeholder>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+}
+
+export default CategoryCardPlaceholder;

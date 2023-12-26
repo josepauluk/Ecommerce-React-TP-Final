@@ -5,12 +5,6 @@
   Descripción: [Proyecto Final Informatorio Diciembre 2023]
 */
 
-function NoMatch() {
-  return (
-    <>
-      <p>Not Found 404</p>
-    </>
-  );
-}
+import { createContext } from 'react';
 
-export default NoMatch;
+export const AuthContext = createContext(null);

@@ -5,12 +5,8 @@
   Descripción: [Proyecto Final Informatorio Diciembre 2023]
 */
 
-function NoMatch() {
-  return (
-    <>
-      <p>Not Found 404</p>
-    </>
-  );
-}
-
-export default NoMatch;
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }

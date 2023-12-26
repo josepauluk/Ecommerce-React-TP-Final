@@ -5,12 +5,4 @@
   Descripción: [Proyecto Final Informatorio Diciembre 2023]
 */
 
-function NoMatch() {
-  return (
-    <>
-      <p>Not Found 404</p>
-    </>
-  );
-}
-
-export default NoMatch;
+export const API_URL = 'https://api.escuelajs.co/api/v1';
